@@ -312,19 +312,6 @@ function mark_inactivelayer_bits!(point_types::Array{PointType, 3})
             vec[idx] |= inactive_layer_bit
         end
     end
-
-
-    if any((point_types .& undepleted_bit) .!= 0)
-        for j in 1:sz2, k in 1:sz3
-            propagate_inactive!(@view point_types[:, j, k])
-        end
-        for i in 1:sz1, k in 1:sz3
-            propagate_inactive!(@view point_types[i, :, k])
-        end
-        for i in 1:sz1, j in 1:sz2
-            propagate_inactive!(@view point_types[i, j, :])
-        end
-    end    
 end
 
 
